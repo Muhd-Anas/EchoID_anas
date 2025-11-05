@@ -26,8 +26,8 @@ Notes:
   Use other modules for augmentation and mel-spectrogram feature extraction.
 - logger is used instead of print statements for cleaner debugging.
 
-Author: Muhd Uwais
 Name: EchoID
+Author: Muhd Uwais
 Project: Deep Voice Speaker Recognition CNN
 Purpose: Audio Dataset Loader
 License: MIT
@@ -120,7 +120,8 @@ class AudioDatasetLoader:
             tuple: Train-test split of (x_train, x_test, y_train, y_test)
         """
 
-        logger.info("Loading dataset from directory... this may take a few seconds.")
+        logger.info(
+            "Loading dataset from directory... this may take a few seconds.")
 
         import keras
 
@@ -167,7 +168,7 @@ class AudioDatasetLoader:
 
         logger.info(
             f"Converting to {num_batches} batches with batch_size of {self.batch_size}")
-        
+
         # Trim data so it divides evenly
         x_data_trimmed = x_data[: num_batches * self.batch_size]
         y_data_trimmed = y_data[: num_batches * self.batch_size]

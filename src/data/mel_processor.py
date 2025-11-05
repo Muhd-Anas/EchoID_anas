@@ -16,8 +16,8 @@ Example:
     >>> augmentor = MelAugmentor()
     >>> mel_aug, label_aug = augmentor.run(mel, label)
 
-Author: Muhd Uwais
 Name: EchoID
+Author: Muhd Uwais
 Project: Deep Voice Speaker Recognition CNN
 Purpose: Audio Augmentation
 License: MIT
@@ -69,12 +69,12 @@ class MelAugmentor:
     """
 
     def __init__(
-                self, 
-                sr: int = 16000, 
-                n_mels: int = 64,
-                n_fft: int = 1024, 
-                hop_length: int = 256
-            ):
+        self,
+        sr: int = 16000,
+        n_mels: int = 64,
+        n_fft: int = 1024,
+        hop_length: int = 256
+    ):
         """
         Handles mel-spectrogram feature-space augmentations such as
         SpecAugment (time/frequency masking) and VTLP (Vocal Tract Length Perturbation).
@@ -132,7 +132,7 @@ class MelAugmentor:
             augmented[f0:f0 + f, :] = 0
 
         return augmented
-    
+
     # -------- Vocal Tract Length Perturbation (VTLP) --------------
 
     def _vtlp(self, mel, alpha_range=(0.9, 1.1)):
@@ -156,16 +156,16 @@ class MelAugmentor:
                 warped_i = int(alpha * i)
             else:
                 warped_i = int(
-                    (num_freq_bins - alpha * f0) / (num_freq_bins - f0) * (i - f0) + alpha * f0
+                    (num_freq_bins - alpha * f0) /
+                    (num_freq_bins - f0) * (i - f0) + alpha * f0
                 )
             warped_i = min(warped_i, num_freq_bins - 1)
             warped_mel[i, :] = mel[warped_i, :]
 
         return warped_mel
-    
 
     # ----------- Random Augmentation Pipeline --------------------
-    
+
     def _random_augment(self, mel_batch: np.ndarray) -> np.ndarray:
         """
         Apply random augmentations to each mel-spectrogram in a batch.
@@ -189,16 +189,17 @@ class MelAugmentor:
                     try:
                         augmented = func(augmented)
                     except Exception as e:
-                        logger.warning(f"⚠️ Augmentation '{name}' failed for sample {i}: {e}")
+                        logger.warning(
+                            f"⚠️ Augmentation '{name}' failed for sample {i}: {e}")
 
             # Restore 3D shape (n_mels, time, 1)
             if augmented.ndim == 2:
                 augmented = augmented[..., np.newaxis]
 
-            augmented_batch.append(augmented)             
+            augmented_batch.append(augmented)
 
         return np.stack(augmented_batch, axis=0)
-    
+
     # ----------- Full Augmentation Runner -------------------------
 
     def run(self, mel: np.ndarray, label: np.ndarray, num_aug: int = 1, shuffle: bool = True):
@@ -215,11 +216,11 @@ class MelAugmentor:
             tuple[np.ndarray, np.ndarray]: (augmented_mel, augmented_labels)
         """
         logger.info("🚀 Starting mel-spectrogram augmentation pipeline...")
-        
+
         augmented = []
 
         all_labels = np.tile(label, (num_aug + 1, 1))
-        
+
         for i in range(num_aug):
             logger.info(f"🔁 Running augmentation round {i + 1}/{num_aug}...")
             try:
@@ -244,12 +245,12 @@ class MelAugmentor:
 
         logger.info(f"✅ Augmentation complete! Final shape: {combined.shape}")
         return combined, all_labels
-    
+
 
 # ============================================================
 # Waveform → Mel-Spectrogram Converter
-# ============================================================    
-    
+# ============================================================
+
 class WaveformToMel:
     """
     Converts raw audio waveforms into normalized mel-spectrograms.
@@ -273,11 +274,12 @@ class WaveformToMel:
     >>> print(mel_specs.shape)
     (2, 32, 64, 188, 1)
     """
+
     def __init__(
-            self, 
-            sr: int = 16000, 
+            self,
+            sr: int = 16000,
             n_mels: int = 64,
-            n_fft: int = 1024, 
+            n_fft: int = 1024,
             hop_length: int = 256
     ):
         """
@@ -292,8 +294,7 @@ class WaveformToMel:
         self.sr = sr
         self.n_mels = n_mels
         self.n_fft = n_fft
-        self.hop_length = hop_length   
-
+        self.hop_length = hop_length
 
     def waveform_to_mel(self, waveform: np.ndarray):
         """
@@ -320,13 +321,13 @@ class WaveformToMel:
                 mel_db = librosa.power_to_db(mel_spec, ref=np.max)
                 mel_specs.append(mel_db)
             except Exception as e:
-                    logger.error(f"❌ Failed to convert sample {i} to mel-spectrogram: {e}")
-            
-    
+                logger.error(
+                    f"❌ Failed to convert sample {i} to mel-spectrogram: {e}")
+
         mel_specs = np.array(mel_specs)[..., np.newaxis]
-        mel_specs = (mel_specs - mel_specs.min()) / (mel_specs.max() - mel_specs.min() + 1e-9)
+        mel_specs = (mel_specs - mel_specs.min()) / \
+            (mel_specs.max() - mel_specs.min() + 1e-9)
         return mel_specs
-    
 
     def run(self, audio, label):
         """
@@ -347,9 +348,9 @@ class WaveformToMel:
             mel_batches.append(mel)
             logger.info(f"Converted batch {i + 1}/{len(audio)}")
 
-
         mel_batches = np.array(mel_batches)
-        logger.info(f"✅ Mel conversion completed. Final shape: {mel_batches.shape}")
+        logger.info(
+            f"✅ Mel conversion completed. Final shape: {mel_batches.shape}")
         return mel_batches, label
 
 
@@ -357,4 +358,4 @@ class WaveformToMel:
 # Run module independently for testing
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    ...     
+    ...

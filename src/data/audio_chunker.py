@@ -9,8 +9,8 @@ folders into their respective root speaker directories (e.g., `speaker0` and `sp
 Then delete the original non-chunked audio files to maintain a clean and consistent
 dataset structure for later preprocessing and training steps.
 
-Author: Muhd Uwais
 Name: EchoID
+Author: Muhd Uwais
 Project: Deep Voice Speaker Recognition CNN
 Purpose: Audio Chunk Creation
 License: MIT

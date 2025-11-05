@@ -16,8 +16,8 @@ Notes:
 - Each augmentation is applied randomly with defined probabilities.
 - Extendable for time/frequency masking, VTLP, or spectrogram augmentations.
 
-Author: Muhd Uwais
 Name: EchoID
+Author: Muhd Uwais
 Project: Deep Voice Speaker Recognition CNN
 Purpose: Audio Augmentation
 License: MIT
@@ -248,9 +248,9 @@ class AudioAugmentor:
             for i in range(num_aug):
                 logger.info(f"🔁 Running augmentation round {i + 1}/{num_aug}")
                 aug = np.stack([
-                        self._random_augment(audio[j]).reshape(
-                            audio.shape[1], audio.shape[2]
-                        )
+                    self._random_augment(audio[j]).reshape(
+                        audio.shape[1], audio.shape[2]
+                    )
                     for j in range(audio.shape[0])
                 ])
                 augment_batches.append(aug)
