@@ -18,7 +18,6 @@ License: MIT
 """
 
 
-
 import os
 import logging
 from pathlib import Path
@@ -81,15 +80,16 @@ def get_callbacks():
             min_lr=lr_cfg.get("min_lr", 1e-6),
             verbose=1
         )
-        callbacks.append(reduce_lr) 
+        callbacks.append(reduce_lr)
 
         logger.debug(f"Configured Callbacks: {callbacks}")
         return callbacks
 
     except Exception as e:
-        logger.error(f"❌ Failed to read training configuration: {e}", exc_info=True)
+        logger.error(
+            f"❌ Failed to read training configuration: {e}", exc_info=True)
         raise RuntimeError("Callback initialization failed.") from e
-    
+
 
 # ---------------------------------------------------------
 # Run module independently for testing

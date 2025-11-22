@@ -90,13 +90,9 @@ training:
 # -----------------Inference Configuration---------------------
 
 inference:
-  mode: "continuous"  # or "on_demand"
-  chunk_duration: 3   # need to be same of the chunk duration used in training
+  duration: 3   # need to be same of the chunk duration used in training
   sample_rate: 16000
-  confidence_threshold: 0.5
-  tts_engine: "pyttsx3"
-  tts_rate: 150
-  audio_device: "default"    
+  threshold: 0.7  
 
 
 # -------------------------File Paths-------------------------
