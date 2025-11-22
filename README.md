@@ -5,7 +5,10 @@
 ![Keras](https://img.shields.io/badge/keras-3.11.3-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-> A powerful CNN-based binary speaker recognition system that identifies whether an audio sample belongs to a target speaker using advanced mel-spectrogram features and deep learning.
+> **📚 Educational Purpose Project for Beginners**  
+> EchoID is a project that started for the purpose of education for beginners who want to create voice recognition model but couldn't or don't want to write big boilerplate codes and don't have lots of data (so we need to do augmentation which will increase the code itself). This educational purpose project features **binary classification** for speaker recognition.
+
+> **⚠️ IMPORTANT: This is an educational purpose project - you can't use it in production.**
 
 **🎬 Demo Video Coming Soon!** A comprehensive walkthrough showing how to use this project will be available shortly.
 
@@ -33,7 +36,9 @@
 
 ## 🎯 About the Project
 
-**EchoID** is a deep learning-powered voice speaker recognition system designed to distinguish between a target speaker and others. It leverages Convolutional Neural Networks (CNNs) trained on mel-spectrogram representations of audio signals to achieve accurate binary classification.
+**EchoID** is an educational deep learning project designed to help beginners learn voice speaker recognition. This project was created for those who want to build a voice recognition model without writing extensive boilerplate code or having large datasets (data augmentation is built-in to help with limited data). It leverages Convolutional Neural Networks (CNNs) trained on mel-spectrogram representations of audio signals to achieve accurate **binary classification** - distinguishing between a target speaker and others.
+
+**This is purely for educational purposes and should not be used in production environments.**
 
 ### Key Highlights:
 - 🧠 **Deep CNN Architecture**: Custom-built CNN model optimized for speaker recognition
