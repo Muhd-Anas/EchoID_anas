@@ -8,59 +8,40 @@
 
 version: v1
 
-
 # ---------------------Project Information--------------------
 
 project:
   name: EchoID
-  description: A CNN model for binary speaker recognition using mel-spectrogram 
+  description: A CNN model for binary speaker recognition using mel-spectrogram
     inputs.
   author: Muhd Uwais
-
 
 # -------------------Model Configuration----------------------
 
 model:
-  # Input shape of mel-spectrograms (Height, Width, Channels)
-  input_shape:
-    - 64
-    - 188
-    - 1
+  # Input shape of mel-spectrograms (Height, Width, Channels),
+  # Change according to duration of audio chunks
+  input_shape: [64, 188, 1]
 
-  # Number of convolutional filters for each Conv2D layer  
-  filters:
-    - 32
-    - 64
-    - 128
+  # Number of convolutional filters for each Conv2D layer
+  filters: [32, 64, 128]
 
-  # Fully connected layer units  
-  dense_units:
-    - 512
+  # Fully connected layer units
+  dense_units: [512]
 
-  # Dropout rates applied after layers (to prevent overfitting)  
-  dropout_rates:
-    - 0.25
-    - 0.25
-    - 0.3
-    - 0.5
+  # Dropout rates applied after layers (to prevent overfitting)
+  dropout_rates: [0.25, 0.25, 0.3, 0.5]
 
   # Max pooling sizes for each MaxPooling2D layer
-  max_pool_sizes:
-    - 2
-    - 2
-    - 2
+  max_pool_sizes: [2, 2, 2]
 
-  # Kernel sizes for each Conv2D layer  
-  kernel_sizes:
-    - 3
-    - 3
-    - 3
+  # Kernel sizes for each Conv2D layer
+  kernel_sizes: [3, 3, 3]
 
-  # Model compilation parameters  
+  # Model compilation parameters
   loss: binary_crossentropy
   optimizer: adam
-  metrics: ['accuracy', 'recall', 'precision']
-
+  metrics: ["accuracy", "recall", "precision"]
 
 # -----------------Training Configuration---------------------
 
@@ -86,18 +67,15 @@ training:
     patience: 4
     min_lr: 1e-6
 
-
 # -----------------Inference Configuration---------------------
 
 inference:
-  duration: 3   # need to be same of the chunk duration used in training
+  duration: 3 # need to be same of the chunk duration used in training
   sample_rate: 16000
-  threshold: 0.7  
-
+  threshold: 0.7
 
 # -------------------------File Paths-------------------------
 
 paths:
   # Directory to save trained models and weights
   save_dir: models/cnn_model_v1/
-
