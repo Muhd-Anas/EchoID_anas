@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 > **📚 Educational Purpose Project for Beginners**  
-> EchoID is a project that started for the purpose of education for beginners who want to create voice recognition model but couldn't or don't want to write big boilerplate codes and don't have lots of data (so we need to do augmentation which will increase the code itself). This educational purpose project features **binary classification** for speaker recognition.
+> EchoID is a project that started for the purpose of education for beginners who want to create a voice recognition model but couldn't or don't want to write big boilerplate codes and don't have lots of data (so we need to do augmentation which will increase the code itself). This educational purpose project features **binary classification** for speaker recognition.
 
 > **⚠️ IMPORTANT: This is an educational purpose project - you can't use it in production.**
 
